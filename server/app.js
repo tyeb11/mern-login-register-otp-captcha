@@ -2,8 +2,11 @@ import chalk from "chalk";
 import express from "express";
 import connectToDB from "./utils/connect.js";
 import authRoute from "./routes/auth.js";
+import cors from "cors";
 
 const app = express();
+app.use(express.json());
+app.use(cors());
 app.use("/api/auth", authRoute);
 
 await connectToDB()
