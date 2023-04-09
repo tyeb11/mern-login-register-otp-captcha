@@ -27,14 +27,6 @@ export const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  state: {
-    type: String,
-    required: [true, "please provide state name"],
-  },
-  city: { type: String, required: [true, "please provide city name"] },
-  subject: { type: String, required: [true, "please provide subject name"] },
-  test_date: { type: Date, required: [true, "please provide test date"] },
-  time_slot: { type: String, required: [true, "please provide time slot"] },
 });
 
 export const User = mongoose.model("User", UserSchema);
