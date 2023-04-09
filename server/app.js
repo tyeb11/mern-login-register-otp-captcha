@@ -3,11 +3,17 @@ import express from "express";
 import connectToDB from "./utils/connect.js";
 import authRoute from "./routes/auth.js";
 import cors from "cors";
+import slotRouter from "./routes/slot.js";
+import adminRouter from "./routes/admin.js";
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
+
 app.use("/api/auth", authRoute);
+app.use("/api", slotRouter);
+app.use("/api/admin", adminRouter);
 
 await connectToDB()
   .then(() => {
