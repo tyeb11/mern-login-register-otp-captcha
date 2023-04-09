@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"env-cmd -e DEVELOPMENT nodemon app.js\"",
+    "prd": "concurrently \"env-cmd -e PRODUCTION nodemon app.js\"",
+    "test": "concurrently \"env-cmd -e TEST nodemon app.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "concurrently": "^8.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "nodemon": "^2.0.22"
+  }
+}
