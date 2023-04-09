@@ -3,19 +3,11 @@ import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import otpGenerator from "otp-generator";
+import { otpVerificationMail } from "../utils/mail.js";
 
 export async function register(req, res) {
   try {
-    const {
-      name,
-      email,
-      password,
-      state,
-      city,
-      subject,
-      test_date,
-      time_slot,
-    } = req.body;
+    const { name, email, password } = req.body;
 
     const emailExists = await User.findOne({ email });
 
@@ -32,16 +24,12 @@ export async function register(req, res) {
           email,
           password: hashedPassword,
           otp,
-          state,
-          city,
-          subject,
-          test_date,
-          time_slot,
         });
         console.log(chalk.yellow(`otp : ${otp}`));
         user
           .save()
-          .then(() => {
+          .then(async () => {
+            await otpVerificationMail(name, email, otp);
             console.log(chalk.green(`user registered successfully`));
             res.status(201).send({ msg: "user registered successfully" });
           })
@@ -57,26 +45,6 @@ export async function register(req, res) {
   } catch (error) {
     console.log(chalk.red(`Error registering a user`));
     return res.status(500).send({ error });
-  }
-}
-
-export async function verifyUser(req, res, next) {
-  try {
-    const { email } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) {
-      console.log(chalk.red(`user does not exists in db`));
-      return res.status(404).send({ error: "can not find user" });
-    }
-    if (!user.email_verified) {
-      console.log(chalk.red(`${user.email} not verified`));
-      return res.status(404).send({ error: "user not verified" });
-    }
-    console.log(chalk.green(`user exists in db`));
-    next();
-  } catch (error) {
-    consolelog(chalk.red(`Error Verifying user ${error}`));
-    return res.status(404).send({ error: "Error while verifing user" });
   }
 }
 
@@ -129,9 +97,10 @@ export async function generateOTP(req, res) {
       upperCaseAlphabets: true,
       specialChars: true,
     });
-    console.log(chalk.yellow(`otp : ${otp}`));
     user.otp = otp;
     await user.save();
+    console.log(chalk.yellow(`otp : ${otp}`));
+    await otpVerificationMail(user.name, user.email, user.otp);
     return res.status(200).send({ msg: "OTP generated" });
   } catch (error) {
     console.log(chalk.red(`Error while generating OTP`));
