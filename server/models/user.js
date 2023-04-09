@@ -16,6 +16,17 @@ export const UserSchema = new mongoose.Schema({
     required: [true, "please provide a unique email ID"],
     unique: true,
   },
+  user_type: {
+    type: String,
+    default: "user",
+  },
+  otp: {
+    type: String,
+  },
+  email_verified: {
+    type: Boolean,
+    default: false,
+  },
   state: {
     type: String,
     required: [true, "please provide state name"],
