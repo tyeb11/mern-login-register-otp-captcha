@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { verifyUser } from "../controllers/auth";
-import { addSlot, getAllSlot } from "../controllers/slot";
+import { verifyUser } from "../middlewares/verifyUser.js";
+import { addSlot, getAllSlot } from "../controllers/slot.js";
 
 const slotRouter = Router();
 
