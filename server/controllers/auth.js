@@ -138,3 +138,21 @@ export async function verifyOTP(req, res) {
     return res.status(500).send({ error: "error while verifing OTP" });
   }
 }
+
+export async function deleteUser(req, res) {
+  try {
+    const { email } = req.body;
+    User.deleteOne({ email })
+      .then((res) => {
+        console.log(chalk.blue(`Deleted user ${res.email}`));
+        res.status(200).send({ msg: "user deleted successfully" });
+      })
+      .catch((e) => {
+        console.log(chalk.red("Error deleting user"));
+        return res.status(500).send({ error: "can not delete user" });
+      });
+  } catch (error) {
+    console.log(chalk.red("Error deleting user"));
+    return res.status(500).send({ error: "can not delete user" });
+  }
+}
