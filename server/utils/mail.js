@@ -1,5 +1,22 @@
 import chalk from "chalk";
 import nodemailer from "nodemailer";
+import { google } from "googleapis";
+
+const oAuth2Client = new google.auth.OAuth2(
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_CLIENT_SECRET,
+  process.env.GOOGLE_CLIENT_CALLBACK_URL
+);
+
+oAuth2Client.setCredentials({
+  refresh_token: process.env.REFRESH_TOKEN,
+});
+
+const gmail = google.gmail({
+  version: "v1",
+  auth: oAuth2Client,
+});
+
 export async function otpVerificationMail(name, email, otp) {
   const mail = {
     from: process.env.ORGANIZATION_EMAIL_ID,
