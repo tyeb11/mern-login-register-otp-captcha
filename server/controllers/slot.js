@@ -1,6 +1,6 @@
 import chalk from "chalk";
-import { User } from "../models/user";
-import { Slot } from "../models/slot";
+import { User } from "../models/user.js";
+import { Slot } from "../models/slot.js";
 
 export async function getAllSlot(req, res) {
   try {
