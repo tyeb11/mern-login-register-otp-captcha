@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { User } from "../models/user";
+import { User } from "../models/user.js";
 
 export async function verifyUser(req, res, next) {
   try {
