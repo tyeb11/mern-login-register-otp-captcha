@@ -5,6 +5,7 @@ import authRoute from "./routes/auth.js";
 import cors from "cors";
 import slotRouter from "./routes/slot.js";
 import adminRouter from "./routes/admin.js";
+import dataRouter from "./routes/data.js";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use("/api/auth", authRoute);
 app.use("/api", slotRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/data", dataRouter);
 
 await connectToDB()
   .then(() => {
