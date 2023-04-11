@@ -16,7 +16,7 @@ import { verifyUser } from "../middlewares/verifyUser.js";
 
 const dataRouter = Router();
 
-dataRouter.get("/subject", getSubject);
+dataRouter.get("/subject", getSubject); //verifyUser
 dataRouter.get("/state", getState);
 dataRouter.get("/city", getCity);
 dataRouter.get("/time-slot", getTimeSlot);

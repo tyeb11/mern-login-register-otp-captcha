@@ -4,13 +4,17 @@ import { Slot } from "../models/slot.js";
 
 export async function getAllSlot(req, res) {
   try {
-    const { email } = req.body;
+    // const { email = "tayyeb.merchant1@gmail.com" } = req.body;
+    const email = "tayyeb.merchant1@gmail.com";
     const user = await User.findOne({ email });
     if (!user) {
       console.log(chalk.red(`user does not exists in db`));
       return res.status(404).send({ error: "can not find user" });
     }
-    const slots = await Slot.find({ candidate: user._id });
+    const slots = await Slot.find({ candidate: user._id }, [
+      "-candidate",
+      "-_id",
+    ]);
     console.log(chalk.blue(`slots : ${slots}`));
     return res.status(200).send({ slots });
   } catch (error) {

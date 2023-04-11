@@ -4,7 +4,7 @@ import { addSlot, getAllSlot } from "../controllers/slot.js";
 
 const slotRouter = Router();
 
-slotRouter.get("/slot", verifyUser, getAllSlot);
+slotRouter.get("/slot", getAllSlot); //verifyUser
 slotRouter.post("/slot", verifyUser, addSlot);
 
 export default slotRouter;
