@@ -16,11 +16,11 @@ import { verifyUser } from "../middlewares/verifyUser.js";
 
 const dataRouter = Router();
 
-dataRouter.get("/subject", verifyUser, getSubject);
-dataRouter.get("/state", verifyUser, getState);
-dataRouter.get("/city", verifyUser, getCity);
-dataRouter.get("/time-slot", verifyUser, getTimeSlot);
-dataRouter.get("/test-date", verifyUser, getTestDate);
+dataRouter.get("/subject", getSubject);
+dataRouter.get("/state", getState);
+dataRouter.get("/city", getCity);
+dataRouter.get("/time-slot", getTimeSlot);
+dataRouter.get("/test-date", getTestDate);
 
 dataRouter.post("/subject", verifyAdmin, addSubject);
 dataRouter.post("/state", verifyAdmin, addState);
