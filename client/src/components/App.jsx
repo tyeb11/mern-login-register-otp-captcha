@@ -14,7 +14,7 @@ function App() {
             <Route path="/register" element={<RegisterRoute />} />
             <Route path="/verify-otp" element={<VerifyOtpRoutes />} />
             <Route path="/add-slot" element={<AddSlotRoute />} />
-            <Route path="slot" element={<SlotRoute />} />
+            <Route path="/slot" element={<SlotRoute />} />
           </Routes>
         </BrowserRouter>
       </Container>
