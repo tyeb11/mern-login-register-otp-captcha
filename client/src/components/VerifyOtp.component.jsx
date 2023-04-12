@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 function VerifyOtp() {
+  const navigate = useNavigate();
   const [otp, setOtp] = useState("");
 
   const handleSubmit = async () => {
@@ -15,6 +17,9 @@ function VerifyOtp() {
       id: Cookies.get("id"),
     });
     console.log(data);
+    if (data.msg) {
+      navigate("/add-slot");
+    }
   };
   return (
     <>

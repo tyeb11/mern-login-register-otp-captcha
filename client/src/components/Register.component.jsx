@@ -2,8 +2,10 @@ import { useState, useRef } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
   const captchaRef = useRef(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -23,6 +25,9 @@ function Register() {
     });
     console.log(data);
     captchaRef.current.reset();
+    if (data.msg) {
+      navigate("/verify-otp");
+    }
   };
 
   return (
@@ -68,7 +73,6 @@ function Register() {
           Submit
         </Button>
       </Form>
-      <reCAPTCHA />
     </>
   );
 }

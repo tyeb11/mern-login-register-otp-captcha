@@ -2,8 +2,9 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
-
+import { useNavigate } from "react-router-dom";
 function AddSlot() {
+  const navigate = useNavigate();
   const [subject, setSubject] = useState([]);
   const [state, setState] = useState([]);
   const [city, setCity] = useState([]);
@@ -18,39 +19,51 @@ function AddSlot() {
 
   useEffect(() => {
     const getData = async () => {
-      setSubject(
-        (
-          await axios.get("/api/data/subject", {
-            params: { id: Cookies.get("id") },
-          })
-        ).data
-      );
-      setState((await axios.get("/api/data/state", {
-            params: { id: Cookies.get("id") },
-          })).data);
-      setCity(
-        (
-          await axios.get("/api/data/city", {
-            params: { id: Cookies.get("id") },
-          })
-        ).data
-      );
-      setTestDate(
-        (
-          await axios.get("/api/data/test-date", {
-            params: { id: Cookies.get("id") },
-          })
-        ).data
-      );
-      setTimeSlot(
-        (
-          await axios.get("/api/data/time-slot", {
-            params: { id: Cookies.get("id") },
-          })
-        ).data
-      );
+      try {
+        setSubject(
+          (
+            await axios.get("/api/data/subject", {
+              params: { id: Cookies.get("id") },
+            })
+          ).data
+        );
+        setState(
+          (
+            await axios.get("/api/data/state", {
+              params: { id: Cookies.get("id") },
+            })
+          ).data
+        );
+        setCity(
+          (
+            await axios.get("/api/data/city", {
+              params: { id: Cookies.get("id") },
+            })
+          ).data
+        );
+        setTestDate(
+          (
+            await axios.get("/api/data/test-date", {
+              params: { id: Cookies.get("id") },
+            })
+          ).data
+        );
+        setTimeSlot(
+          (
+            await axios.get("/api/data/time-slot", {
+              params: { id: Cookies.get("id") },
+            })
+          ).data
+        );
+      } catch (e) {
+        navigate("/");
+      }
     };
-    getData();
+    try {
+      getData();
+    } catch (e) {
+      navigate("/");
+    }
   }, []);
   useEffect(() => {
     setStateValue(state[0]);
@@ -132,6 +145,7 @@ function AddSlot() {
           Submit
         </Button>
       </Form>
+      <Button onClick={() => navigate("/slot")}>Booked Slots</Button>
     </>
   );
 }
