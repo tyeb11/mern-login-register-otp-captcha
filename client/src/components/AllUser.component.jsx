@@ -25,7 +25,10 @@ function AllUser() {
       {userData.map((value) => {
         return (
           <>
-            <Card style={{ width: "80rem" }}>
+            <Card
+              onClick={() => navigate(`/admin/slot/${value._id}`)}
+              style={{ width: "80rem" }}
+            >
               <Card.Body>
                 <Card.Title>Name {value.candidate.name}</Card.Title>
                 <Card.Title>Email {value.candidate.email}</Card.Title>

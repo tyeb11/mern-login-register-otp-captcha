@@ -125,6 +125,7 @@ function AddData() {
           Add
         </Button>
       </Form>
+      <Button onClick={() => navigate("/admin/data")}>Get All Data</Button>
     </>
   );
 }

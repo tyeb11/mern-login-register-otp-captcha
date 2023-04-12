@@ -1,8 +1,10 @@
 import { Form, Button } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function RegisterAdmin() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,6 +21,9 @@ function RegisterAdmin() {
       password,
     });
     console.log(data);
+    if (data.msg) {
+      navigate("/admin/users");
+    }
   };
 
   return (
