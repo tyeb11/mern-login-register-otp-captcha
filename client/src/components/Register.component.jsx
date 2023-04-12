@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
+import ReCAPTCHA from "react-google-recaptcha";
+
 function Register() {
+  const captchaRef = useRef(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,12 +14,15 @@ function Register() {
     if (!name && !email && !password) {
       return;
     }
+    const token = captchaRef.current.getValue();
     const { data } = await axios.post("/api/auth/register", {
       name,
       email,
       password,
+      token,
     });
     console.log(data);
+    captchaRef.current.reset();
   };
 
   return (
@@ -53,10 +59,16 @@ function Register() {
           />
           <Form.Text className="text-muted">Enter your Password here</Form.Text>
         </Form.Group>
+        <ReCAPTCHA
+          style={{ display: "inline-block" }}
+          sitekey="6LfEcHwlAAAAAFZGSyww_21MYcUNcseclFYAvRAQ"
+          ref={captchaRef}
+        />
         <Button variant="primary" onClick={() => handleSubmit()}>
           Submit
         </Button>
       </Form>
+      <reCAPTCHA />
     </>
   );
 }
