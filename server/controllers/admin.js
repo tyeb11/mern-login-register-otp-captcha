@@ -82,8 +82,24 @@ export async function getUser(req, res) {
     return res.status(500).send({ error: "can not get user data" });
   }
 }
+export async function getSlot(req, res) {
+  try {
+    console.log(req.params.slotId);
+    const slot = await Slot.findById(req.params.slotId, ["-candidate"]);
+    if (!slot) {
+      console.log(chalk.red(`${req.params.slotId} slot not found`));
+      return res.status(401).send({ error: "slot not found" });
+    }
+    console.log(chalk.magenta(slot));
+    res.status(200).send(slot);
+  } catch (error) {
+    console.log(chalk.red(`Error getting user data`));
+    return res.status(500).send({ error: "can not get user data" });
+  }
+}
 export async function getAllUsers(req, res) {
   try {
+    console.log("hello");
     const slot = await Slot.find().populate("candidate", ["-password", "-otp"]);
     console.log(slot);
     return res.status(200).send(slot);
@@ -94,8 +110,8 @@ export async function getAllUsers(req, res) {
 }
 export async function editSlot(req, res) {
   try {
-    const { id, state, city, subject, test_date, time_slot } = req.body;
-    const slot = await Slot.findByIdAndUpdate(id, {
+    const { slotId, state, city, subject, test_date, time_slot } = req.body;
+    const slot = await Slot.findByIdAndUpdate(slotId, {
       subject,
       city,
       state,
@@ -112,10 +128,11 @@ export async function editSlot(req, res) {
 }
 export async function deleteSlot(req, res) {
   try {
-    const { id } = req.body;
-    Slot.findByIdAndDelete(id)
-      .then(() => {
-        console.log(chalk.blue("slot deleted"));
+    const { slotId } = req.query;
+
+    Slot.findByIdAndDelete(slotId)
+      .then((slot) => {
+        console.log(chalk.blue(`${slot} slot deleted`));
         return res.status(200).send({ msg: "slot deleted successfull" });
       })
       .catch((error) => {

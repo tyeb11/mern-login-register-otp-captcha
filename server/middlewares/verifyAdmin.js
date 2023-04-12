@@ -12,8 +12,9 @@ export async function verifyAdmin(req, res, next) {
       id = req.body.id;
     }
     const user = await User.findById(id);
+    
     if (!process.env.ADMIN_EMAIL_IDS.includes(user.email)) {
-      console.log(chalk.red(`${email} access restricted`));
+      console.log(chalk.red(`${user.email} access restricted`));
       return res.status(404).send({ error: "user not allowed" });
     }
     if (!user) {
