@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
@@ -17,11 +18,37 @@ function AddSlot() {
 
   useEffect(() => {
     const getData = async () => {
-      setSubject((await axios.get("/api/data/subject")).data);
-      setState((await axios.get("/api/data/state")).data);
-      setCity((await axios.get("/api/data/city")).data);
-      setTestDate((await axios.get("/api/data/test-date")).data);
-      setTimeSlot((await axios.get("/api/data/time-slot")).data);
+      setSubject(
+        (
+          await axios.get("/api/data/subject", {
+            params: { id: Cookies.get("id") },
+          })
+        ).data
+      );
+      setState((await axios.get("/api/data/state", {
+            params: { id: Cookies.get("id") },
+          })).data);
+      setCity(
+        (
+          await axios.get("/api/data/city", {
+            params: { id: Cookies.get("id") },
+          })
+        ).data
+      );
+      setTestDate(
+        (
+          await axios.get("/api/data/test-date", {
+            params: { id: Cookies.get("id") },
+          })
+        ).data
+      );
+      setTimeSlot(
+        (
+          await axios.get("/api/data/time-slot", {
+            params: { id: Cookies.get("id") },
+          })
+        ).data
+      );
     };
     getData();
   }, []);
@@ -34,7 +61,7 @@ function AddSlot() {
   }, [subject, state, city, testDate, timeSlot]);
   const handleSubmit = async () => {
     const { data } = await axios.post("/api/slot", {
-      email: "tayyeb.amazon@gmail.com",
+      id: Cookies.get("id"),
       subject: subjectValue,
       city: cityValue,
       time_slot: timeSlotValue,

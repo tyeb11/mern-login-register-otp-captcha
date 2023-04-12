@@ -1,26 +1,34 @@
-import axios from "axios";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
-import Card from "react-bootstrap/Card";
+import axios from "axios";
+import { Card } from "react-bootstrap";
 
-function Slot() {
-  const [slotData, setSlotData] = useState([]);
+function AllUser() {
+  const [userData, setUserData] = useState([]);
   useEffect(() => {
     async function getData() {
-      const { data } = await axios.get("/api/slot", {
+      const { data } = await axios.get("/api/admin/all-user", {
         params: { id: Cookies.get("id") },
       });
-      setSlotData(data.slots);
+      setUserData(data);
     }
     getData();
   }, []);
   return (
     <>
-      {slotData.map((value) => {
+      {userData.map((value) => {
         return (
           <>
             <Card style={{ width: "80rem" }}>
               <Card.Body>
+                <Card.Title>Name {value.candidate.name}</Card.Title>
+                <Card.Title>Email {value.candidate.email}</Card.Title>
+                <Card.Subtitle>
+                  User Type {value.candidate.user_type}
+                </Card.Subtitle>
+                <Card.Subtitle>
+                  Email Verified {value.candidate.email_verified}
+                </Card.Subtitle>
                 <Card.Title>Subject {value.subject}</Card.Title>
                 <Card.Subtitle>Test Date {value.test_date}</Card.Subtitle>
                 <Card.Subtitle>Time Slot {value.time_slot}</Card.Subtitle>
@@ -35,4 +43,4 @@ function Slot() {
   );
 }
 
-export default Slot;
+export default AllUser;

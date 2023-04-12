@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 function VerifyOtp() {
   const [otp, setOtp] = useState("");
+
   const handleSubmit = async () => {
     if (!otp) {
       return;
     }
     const { data } = await axios.post("/api/auth/verify-otp", {
       otp,
-      email: "tayyeb.amazon@gmail.com",
+      id: Cookies.get("id"),
     });
     console.log(data);
   };
