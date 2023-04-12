@@ -3,8 +3,18 @@ import { User } from "../models/user.js";
 
 export async function verifyUser(req, res, next) {
   try {
-    const { email } = req.body;
-    const user = await User.findOne({ email });
+    let id;
+    if (req.query.id) {
+      id = req.query.id;
+    }
+
+    if (req.body.id) {
+      id = req.body.id;
+    }
+
+    console.log(id);
+    const user = await User.findById(id);
+    console.log(user);
     if (!user) {
       console.log(chalk.red(`user does not exists in db`));
       return res.status(404).send({ error: "can not find user" });

@@ -6,9 +6,10 @@ import cors from "cors";
 import slotRouter from "./routes/slot.js";
 import adminRouter from "./routes/admin.js";
 import dataRouter from "./routes/data.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
-
+app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 
