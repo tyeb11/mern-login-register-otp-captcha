@@ -27,6 +27,9 @@ export async function register(req, res) {
           .save()
           .then(async () => {
             console.log(chalk.green(`admin registered successfully`));
+            res.cookie("id", `${user._id}`);
+
+            res.cookie("user_type", user.user_type);
             res.status(201).send({ msg: "admin registered successfully" });
           })
           .catch((error) => {

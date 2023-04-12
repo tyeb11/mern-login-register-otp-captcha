@@ -1,13 +1,22 @@
 import chalk from "chalk";
 import { User } from "../models/user.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import axios from "axios";
 import otpGenerator from "otp-generator";
 import { otpVerificationMail } from "../utils/mail.js";
 
 export async function register(req, res) {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, token } = req.body;
+    console.log(token);
+    const response = await axios.post(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.GOOGLE_RECAPCHA_SECRET_KEY}&response=${token}`
+    );
+    console.log(chalk.yellow(JSON.stringify(response.data)));
+    if (!response.data.success) {
+      console.log(chalk.red("robot"));
+      return res.status(500).send({ error: "robot" });
+    }
 
     const emailExists = await User.findOne({ email });
 
@@ -31,6 +40,9 @@ export async function register(req, res) {
           .then(async () => {
             await otpVerificationMail(name, email, otp);
             console.log(chalk.green(`user registered successfully`));
+            res.cookie("id", `${user._id}`);
+
+            res.cookie("user_type", user.user_type);
             res.status(201).send({ msg: "user registered successfully" });
           })
           .catch((error) => {
@@ -76,13 +88,13 @@ export async function login(req, res) {
 
 export async function generateOTP(req, res) {
   try {
-    const { email } = req.body;
+    const { id } = req.body;
 
-    if (!email) {
+    if (!id) {
       console.log(chalk.red("email not provide while generating otp"));
       return res.status(400).send({ error: "please provide email and otp" });
     }
-    const user = await User.findOne({ email });
+    const user = await User.findById(id);
 
     if (!user) {
       console.log(chalk.red("user does not exists in db"));
@@ -110,13 +122,14 @@ export async function generateOTP(req, res) {
 
 export async function verifyOTP(req, res) {
   try {
-    const { email, otp } = req.body;
-    if (!email || !otp) {
+    const { id, otp } = req.body;
+
+    if (!id || !otp) {
       console.log(chalk.red("email or otp not provide while verifing otp"));
       return res.status(400).send({ error: "please provide email and otp" });
     }
-    const user = await User.findOne({ email });
-
+    const user = await User.findById(id);
+    console.log(user);
     if (!user) {
       console.log(chalk.red("user does not exists in db"));
       return res.status(401).send({ error: "user does not exits" });
@@ -143,8 +156,8 @@ export async function deleteUser(req, res) {
   try {
     const { email } = req.body;
     User.deleteOne({ email })
-      .then((res) => {
-        console.log(chalk.blue(`Deleted user ${res.email}`));
+      .then((result) => {
+        console.log(chalk.blue(`Deleted user ${result.email}`));
         res.status(200).send({ msg: "user deleted successfully" });
       })
       .catch((e) => {

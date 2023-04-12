@@ -4,9 +4,9 @@ import { Slot } from "../models/slot.js";
 
 export async function getAllSlot(req, res) {
   try {
-    // const { email = "tayyeb.merchant1@gmail.com" } = req.body;
-    const email = "tayyeb.merchant1@gmail.com";
-    const user = await User.findOne({ email });
+    const { id } = req.query;
+
+    const user = await User.findById(id);
     if (!user) {
       console.log(chalk.red(`user does not exists in db`));
       return res.status(404).send({ error: "can not find user" });
@@ -25,8 +25,8 @@ export async function getAllSlot(req, res) {
 
 export async function addSlot(req, res) {
   try {
-    const { email, state, city, subject, test_date, time_slot } = req.body;
-    const user = await User.findOne({ email });
+    const { id, state, city, subject, test_date, time_slot } = req.body;
+    const user = await User.findById(id);
     if (!user) {
       console.log(chalk.red(`user does not exists in db`));
       return res.status(404).send({ error: "can not find user" });
