@@ -1,7 +1,12 @@
 import { Form, Button } from "react-bootstrap";
+import { InputGroup } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BaseForm } from "../styles/Form.styles";
+import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { SubmitButton } from "../styles/Button.styles";
 
 function RegisterAdmin() {
   const navigate = useNavigate();
@@ -28,43 +33,61 @@ function RegisterAdmin() {
 
   return (
     <>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Name</Form.Label>
+      <BaseForm>
+        <InputGroup style={{ display: "flex", gap: "5px" }}>
+          <AiOutlineUser style={{ fontSize: "30px" }} />
           <Form.Control
+            style={{
+              border: "2px solid black",
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              borderRadius: "0",
+            }}
             value={name}
             onChange={(e) => setName(e.target.value)}
             type="text"
-            placeholder="Enter Name"
+            placeholder="name"
           />
-          <Form.Text className="text-muted">Enter your Name here</Form.Text>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+        </InputGroup>
+        <InputGroup>
+          <AiOutlineMail style={{ fontSize: "30px" }} />
           <Form.Control
+            style={{
+              border: "2px solid black",
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              borderRadius: "0",
+            }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
-            placeholder="Enter email"
+            placeholder="email"
           />
-          <Form.Text className="text-muted">Enter your Email here</Form.Text>
-        </Form.Group>
+        </InputGroup>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+        <InputGroup>
+          <RiLockPasswordLine style={{ fontSize: "30px" }} />
           <Form.Control
+            style={{
+              border: "2px solid black",
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              borderRadius: "0",
+            }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
-            placeholder="Password"
+            placeholder="password"
           />
-          <Form.Text className="text-muted">Enter your Password here</Form.Text>
-        </Form.Group>
+        </InputGroup>
 
-        <Button variant="primary" onClick={() => handleSubmit()}>
+        <SubmitButton variant="primary" onClick={() => handleSubmit()}>
           Submit
-        </Button>
-      </Form>
+        </SubmitButton>
+      </BaseForm>
     </>
   );
 }
