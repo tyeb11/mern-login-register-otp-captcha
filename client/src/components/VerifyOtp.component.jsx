@@ -3,6 +3,8 @@ import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { BaseForm } from "../styles/Form.styles";
+import { SubmitButton } from "../styles/Button.styles";
 
 function VerifyOtp() {
   const navigate = useNavigate();
@@ -23,23 +25,33 @@ function VerifyOtp() {
   };
   return (
     <>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>OTP</Form.Label>
+      <BaseForm>
+        <Form.Group
+          style={{ width: "100%" }}
+          className="mb-3"
+          controlId="formBasicEmail"
+        >
           <Form.Control
             value={otp}
             onChange={(e) => setOtp(e.target.value)}
             type="text"
-            placeholder="Enter OTP"
+            placeholder="OTP"
+            style={{
+              border: "2px solid black",
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              borderRadius: "0",
+            }}
           />
           <Form.Text className="text-muted">
             OTP is send to given email id
           </Form.Text>
         </Form.Group>
-        <Button variant="primary" onClick={() => handleSubmit()}>
+        <SubmitButton variant="primary" onClick={() => handleSubmit()}>
           Submit
-        </Button>
-      </Form>
+        </SubmitButton>
+      </BaseForm>
     </>
   );
 }
