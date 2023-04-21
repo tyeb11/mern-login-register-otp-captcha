@@ -3,6 +3,8 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { BaseForm } from "../styles/Form.styles";
+import { SubmitButton, EditButton } from "../styles/Button.styles";
 function AddSlot() {
   const navigate = useNavigate();
   const [subject, setSubject] = useState([]);
@@ -85,10 +87,11 @@ function AddSlot() {
   };
   return (
     <>
-      <Form>
-        <Form.Group>
+      <BaseForm style={{ gap: "10px" }}>
+        <Form.Group style={{ width: "100%" }}>
           <Form.Label>State</Form.Label>
           <Form.Select
+            style={{ border: "2px solid black" }}
             size="lg"
             onChange={(e) => setStateValue(e.currentTarget.value)}
           >
@@ -97,9 +100,10 @@ function AddSlot() {
             ))}
           </Form.Select>
         </Form.Group>
-        <Form.Group>
+        <Form.Group style={{ width: "100%" }}>
           <Form.Label>City</Form.Label>
           <Form.Select
+            style={{ border: "2px solid black" }}
             size="lg"
             onChange={(e) => setCityValue(e.currentTarget.value)}
           >
@@ -108,9 +112,10 @@ function AddSlot() {
             ))}
           </Form.Select>
         </Form.Group>
-        <Form.Group>
+        <Form.Group style={{ width: "100%" }}>
           <Form.Label>Subject</Form.Label>
           <Form.Select
+            style={{ border: "2px solid black" }}
             size="lg"
             onChange={(e) => setSubjectValue(e.currentTarget.value)}
           >
@@ -119,9 +124,10 @@ function AddSlot() {
             ))}
           </Form.Select>
         </Form.Group>
-        <Form.Group>
+        <Form.Group style={{ width: "100%" }}>
           <Form.Label>Time Slot</Form.Label>
           <Form.Select
+            style={{ border: "2px solid black" }}
             size="lg"
             onChange={(e) => setTimeSlotvalue(e.currentTarget.value)}
           >
@@ -130,9 +136,10 @@ function AddSlot() {
             ))}
           </Form.Select>
         </Form.Group>
-        <Form.Group>
+        <Form.Group style={{ width: "100%" }}>
           <Form.Label>Test Date</Form.Label>
           <Form.Select
+            style={{ border: "2px solid black" }}
             size="lg"
             onChange={(e) => setTestDateValue(e.currentTarget.value)}
           >
@@ -141,11 +148,17 @@ function AddSlot() {
             ))}
           </Form.Select>
         </Form.Group>
-        <Button variant="primary" onClick={() => handleSubmit()}>
-          Submit
-        </Button>
-      </Form>
-      <Button onClick={() => navigate("/slot")}>Booked Slots</Button>
+      </BaseForm>
+      <div style={{ display: "flex", gap: "50px", marginTop: "40px" }}>
+        <EditButton onClick={() => navigate("/slot")}>Booked Slots</EditButton>
+        <SubmitButton
+          style={{ width: "150px" }}
+          variant="primary"
+          onClick={() => handleSubmit()}
+        >
+          Add Slot
+        </SubmitButton>
+      </div>
     </>
   );
 }
