@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
+import { BiTimeFive, BiCalendar } from "react-icons/bi";
 
 function Slot() {
   const navigate = useNavigate();
@@ -25,13 +26,28 @@ function Slot() {
       {slotData.map((value) => {
         return (
           <>
-            <Card style={{ width: "80rem" }}>
-              <Card.Body>
-                <Card.Title>Subject {value.subject}</Card.Title>
-                <Card.Subtitle>Test Date {value.test_date}</Card.Subtitle>
-                <Card.Subtitle>Time Slot {value.time_slot}</Card.Subtitle>
-                <Card.Subtitle>City {value.city}</Card.Subtitle>
-                <Card.Subtitle>State {value.state}</Card.Subtitle>
+            <Card style={{ width: "100%", margin: "20px" }}>
+              <Card.Body
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  position: "relative",
+                }}
+              >
+                <Card.Subtitle style={{ position: "absolute", left: "5px" }}>
+                  <BiTimeFive /> {value.time_slot}
+                </Card.Subtitle>
+                <Card.Subtitle style={{ position: "absolute", right: "5px" }}>
+                  <BiCalendar /> {value.test_date}
+                </Card.Subtitle>
+                <Card.Title style={{ marginTop: "20px", fontSize: "1.7rem" }}>
+                  {value.subject}
+                </Card.Title>
+                <Card.Subtitle>
+                  {value.state}, {value.city}
+                </Card.Subtitle>
               </Card.Body>
             </Card>
           </>
