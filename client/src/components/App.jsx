@@ -10,7 +10,16 @@ import Home from "./Home.component";
 function App() {
   return (
     <>
-      <Container>
+      <Container
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "50vw",
+          marginTop: "50px",
+          flexDirection: "column",
+        }}
+      >
         <BrowserRouter>
           <Routes>
             <Route path="/" index element={<Home />} />
