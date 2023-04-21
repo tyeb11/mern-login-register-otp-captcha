@@ -1,8 +1,12 @@
 import { useState, useRef } from "react";
-import { Button, Form } from "react-bootstrap";
+import { InputGroup, Form, Button, InputGroupAddon } from "react-bootstrap";
 import axios from "axios";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useNavigate } from "react-router-dom";
+import { SubmitButton } from "../styles/Button.styles";
+import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { BaseForm } from "../styles/Form.styles";
 
 function Register() {
   const navigate = useNavigate();
@@ -32,47 +36,68 @@ function Register() {
 
   return (
     <>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Name</Form.Label>
+      <BaseForm>
+        <h1>Register</h1>
+        <InputGroup style={{ display: "flex", gap: "5px" }}>
+          <AiOutlineUser style={{ fontSize: "30px" }} />
           <Form.Control
+            style={{
+              border: "2px solid black",
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              borderRadius: "0",
+            }}
             value={name}
             onChange={(e) => setName(e.target.value)}
             type="text"
-            placeholder="Enter Name"
+            placeholder="name"
           />
-          <Form.Text className="text-muted">Enter your Name here</Form.Text>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+        </InputGroup>
+        <InputGroup style={{ display: "flex", gap: "5px" }}>
+          <AiOutlineMail style={{ fontSize: "30px" }} />
           <Form.Control
+            style={{
+              border: "2px solid black",
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              borderRadius: "0",
+            }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
-            placeholder="Enter email"
+            placeholder="email"
           />
-          <Form.Text className="text-muted">Enter your Email here</Form.Text>
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+        </InputGroup>
+        <InputGroup style={{ display: "flex", gap: "5px" }}>
+          <RiLockPasswordLine style={{ fontSize: "30px" }} />
           <Form.Control
+            style={{
+              border: "2px solid black",
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              borderRadius: "0",
+            }}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
-            placeholder="Password"
+            placeholder="password"
           />
-          <Form.Text className="text-muted">Enter your Password here</Form.Text>
-        </Form.Group>
+        </InputGroup>
+
         <ReCAPTCHA
           style={{ display: "inline-block" }}
           sitekey="6LfEcHwlAAAAAFZGSyww_21MYcUNcseclFYAvRAQ"
           ref={captchaRef}
         />
-        <Button variant="primary" onClick={() => handleSubmit()}>
-          Submit
-        </Button>
-      </Form>
+        <SubmitButton onClick={() => handleSubmit()}>Submit</SubmitButton>
+      </BaseForm>
+      <p style={{ marginTop: "40px" }}>
+        Already a member?{" "}
+        <p style={{ color: "blue", display: "inline" }}>Log in</p>
+      </p>
     </>
   );
 }
