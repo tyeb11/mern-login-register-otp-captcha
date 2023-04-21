@@ -57,41 +57,41 @@ function GetData() {
   }, []);
   return (
     <>
-      <Card style={{ width: "80rem" }}>
-        <Card.Body>
-          <Card.Title>Subject</Card.Title>
+      <Card style={{ width: "100%", margin: "20px" }}>
+        <Card.Body style={{ textAlign: "center" }}>
+          <Card.Title style={{ fontSize: "2rem" }}>Subject</Card.Title>
           {subject.map((value) => (
             <Card.Subtitle>{value}</Card.Subtitle>
           ))}
         </Card.Body>
       </Card>
-      <Card style={{ width: "80rem" }}>
-        <Card.Body>
-          <Card.Title>State</Card.Title>
+      <Card style={{ width: "100%", margin: "20px" }}>
+        <Card.Body style={{ textAlign: "center" }}>
+          <Card.Title style={{ fontSize: "2rem" }}>State</Card.Title>
           {state.map((value) => (
             <Card.Subtitle>{value}</Card.Subtitle>
           ))}
         </Card.Body>
       </Card>
-      <Card style={{ width: "80rem" }}>
-        <Card.Body>
-          <Card.Title>City</Card.Title>
+      <Card style={{ width: "100%", margin: "20px" }}>
+        <Card.Body style={{ textAlign: "center" }}>
+          <Card.Title style={{ fontSize: "2rem" }}>City</Card.Title>
           {city.map((value) => (
             <Card.Subtitle>{value}</Card.Subtitle>
           ))}
         </Card.Body>
       </Card>
-      <Card style={{ width: "80rem" }}>
-        <Card.Body>
-          <Card.Title>Test Date</Card.Title>
+      <Card style={{ width: "100%", margin: "20px" }}>
+        <Card.Body style={{ textAlign: "center" }}>
+          <Card.Title style={{ fontSize: "2rem" }}>Test Date</Card.Title>
           {testDate.map((value) => (
             <Card.Subtitle>{value}</Card.Subtitle>
           ))}
         </Card.Body>
       </Card>
-      <Card style={{ width: "80rem" }}>
-        <Card.Body>
-          <Card.Title>Time Slot</Card.Title>
+      <Card style={{ width: "100%", margin: "20px" }}>
+        <Card.Body style={{ textAlign: "center" }}>
+          <Card.Title style={{ fontSize: "2rem" }}>Time Slot</Card.Title>
           {timeSlot.map((value) => (
             <Card.Subtitle>{value}</Card.Subtitle>
           ))}
