@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Form, Button } from "react-bootstrap";
+import { BaseForm } from "../styles/Form.styles";
+import { EditButton, DeleteButton } from "../styles/Button.styles";
 
 function EditSlot() {
   const navigate = useNavigate();
@@ -50,19 +52,41 @@ function EditSlot() {
   };
   return (
     <>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+      <BaseForm style={{ gap: "10px" }}>
+        <Form.Group
+          style={{ width: "100%" }}
+          className="mb-3"
+          controlId="formBasicEmail"
+        >
           <Form.Label>Subject</Form.Label>
           <Form.Control
+            style={{
+              border: "2px solid black",
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              borderRadius: "0",
+            }}
             value={subject}
             onChange={(e) => setsubject(e.target.value)}
             type="text"
             placeholder={subject}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group
+          style={{ width: "100%" }}
+          className="mb-3"
+          controlId="formBasicEmail"
+        >
           <Form.Label>State</Form.Label>
           <Form.Control
+            style={{
+              border: "2px solid black",
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              borderRadius: "0",
+            }}
             value={state}
             onChange={(e) => setstate(e.target.value)}
             type="text"
@@ -70,41 +94,80 @@ function EditSlot() {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group
+          style={{ width: "100%" }}
+          className="mb-3"
+          controlId="formBasicPassword"
+        >
           <Form.Label>City</Form.Label>
           <Form.Control
+            style={{
+              border: "2px solid black",
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              borderRadius: "0",
+            }}
             value={city}
             onChange={(e) => setcity(e.target.value)}
             type="text"
             placeholder={city}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group
+          style={{ width: "100%" }}
+          className="mb-3"
+          controlId="formBasicPassword"
+        >
           <Form.Label>Test Date</Form.Label>
           <Form.Control
+            style={{
+              border: "2px solid black",
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              borderRadius: "0",
+            }}
             value={testDate}
             onChange={(e) => settestDate(e.target.value)}
             type="text"
             placeholder={testDate}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group
+          style={{ width: "100%" }}
+          className="mb-3"
+          controlId="formBasicPassword"
+        >
           <Form.Label>Time Slot</Form.Label>
           <Form.Control
+            style={{
+              border: "2px solid black",
+              borderLeft: "none",
+              borderRight: "none",
+              borderTop: "none",
+              borderRadius: "0",
+            }}
             value={timeSlot}
             onChange={(e) => settimeSlot(e.target.value)}
             type="text"
             placeholder={timeSlot}
           />
         </Form.Group>
-
-        <Button variant="primary" onClick={() => handleEdit()}>
-          Edit
-        </Button>
-        <Button variant="primary" onClick={() => handleDelete()}>
-          Delete
-        </Button>
-      </Form>
+        <div
+          style={{
+            display: "flex",
+            gap: "50px",
+          }}
+        >
+          <DeleteButton variant="primary" onClick={() => handleDelete()}>
+            Delete
+          </DeleteButton>
+          <EditButton variant="primary" onClick={() => handleEdit()}>
+            Edit
+          </EditButton>
+        </div>
+      </BaseForm>
     </>
   );
 }
