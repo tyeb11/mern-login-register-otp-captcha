@@ -3,6 +3,8 @@ import Cookies from "js-cookie";
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { BaseForm } from "../styles/Form.styles";
+import { SubmitButton, EditButton } from "../styles/Button.styles";
 
 function AddData() {
   const navigate = useNavigate();
@@ -48,84 +50,159 @@ function AddData() {
   };
   return (
     <>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Subject</Form.Label>
-          <Form.Control
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            type="text"
-            placeholder="Enter OTP"
-          />
-          <Form.Text className="text-muted">Add Subject to DB</Form.Text>
+      <BaseForm style={{ gap: "10px", marginTop: "10px" }}>
+        <Form.Group
+          style={{ width: "100%" }}
+          className="mb-3"
+          controlId="formBasicEmail"
+        >
+          <div style={{ display: "flex", gap: "10px" }}>
+            <Form.Control
+              style={{
+                border: "2px solid black",
+                borderLeft: "none",
+                borderRight: "none",
+                borderTop: "none",
+                borderRadius: "0",
+              }}
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              type="text"
+              placeholder="Add Subject"
+            />
+            <SubmitButton
+              style={{ width: "100px" }}
+              variant="primary"
+              onClick={() => handleSubject()}
+            >
+              Add
+            </SubmitButton>
+          </div>
         </Form.Group>
-        <Button variant="primary" onClick={() => handleSubject()}>
-          Add
-        </Button>
-      </Form>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>State</Form.Label>
-          <Form.Control
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            type="text"
-            placeholder="Enter OTP"
-          />
-          <Form.Text className="text-muted">Add State to DB</Form.Text>
+
+        <Form.Group
+          style={{ width: "100%" }}
+          className="mb-3"
+          controlId="formBasicEmail"
+        >
+          <div style={{ display: "flex", gap: "10px" }}>
+            <Form.Control
+              style={{
+                border: "2px solid black",
+                borderLeft: "none",
+                borderRight: "none",
+                borderTop: "none",
+                borderRadius: "0",
+              }}
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              type="text"
+              placeholder="Add State"
+            />
+            <SubmitButton
+              style={{ width: "100px" }}
+              variant="primary"
+              onClick={() => handleState()}
+            >
+              Add
+            </SubmitButton>
+          </div>
         </Form.Group>
-        <Button variant="primary" onClick={() => handleState()}>
-          Add
-        </Button>
-      </Form>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>City</Form.Label>
-          <Form.Control
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            type="text"
-            placeholder="Enter OTP"
-          />
-          <Form.Text className="text-muted">Add City to DB</Form.Text>
+
+        <Form.Group
+          style={{ width: "100%" }}
+          className="mb-3"
+          controlId="formBasicEmail"
+        >
+          <div style={{ display: "flex", gap: "10px" }}>
+            <Form.Control
+              style={{
+                border: "2px solid black",
+                borderLeft: "none",
+                borderRight: "none",
+                borderTop: "none",
+                borderRadius: "0",
+              }}
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              type="text"
+              placeholder="Add City"
+            />
+            <SubmitButton
+              style={{ width: "100px" }}
+              variant="primary"
+              onClick={() => handleCity()}
+            >
+              Add
+            </SubmitButton>
+          </div>
         </Form.Group>
-        <Button variant="primary" onClick={() => handleCity()}>
-          Add
-        </Button>
-      </Form>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Test Date</Form.Label>
-          <Form.Control
-            value={testDate}
-            onChange={(e) => setTestDate(e.target.value)}
-            type="text"
-            placeholder="DD/MM/YYYY"
-          />
-          <Form.Text className="text-muted">
-            Add Test Date DD/MM/YYYY to DB
-          </Form.Text>
+
+        <Form.Group
+          style={{ width: "100%" }}
+          className="mb-3"
+          controlId="formBasicEmail"
+        >
+          <div style={{ display: "flex", gap: "10px" }}>
+            <Form.Control
+              style={{
+                border: "2px solid black",
+                borderLeft: "none",
+                borderRight: "none",
+                borderTop: "none",
+                borderRadius: "0",
+              }}
+              value={testDate}
+              onChange={(e) => setTestDate(e.target.value)}
+              type="text"
+              placeholder="Add DD/MM/YYYY"
+            />
+            <SubmitButton
+              style={{ width: "100px" }}
+              variant="primary"
+              onClick={() => handleTestDate()}
+            >
+              Add
+            </SubmitButton>
+          </div>
         </Form.Group>
-        <Button variant="primary" onClick={() => handleTestDate()}>
-          Add
-        </Button>
-      </Form>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Time Slot</Form.Label>
-          <Form.Control
-            value={timeSlot}
-            onChange={(e) => setTimeSlot(e.target.value)}
-            type="text"
-            placeholder="1:00 PM"
-          />
-          <Form.Text className="text-muted">Add Time Slot to DB</Form.Text>
+
+        <Form.Group
+          style={{ width: "100%" }}
+          className="mb-3"
+          controlId="formBasicEmail"
+        >
+          <div style={{ display: "flex", gap: "10px" }}>
+            <Form.Control
+              style={{
+                border: "2px solid black",
+                borderLeft: "none",
+                borderRight: "none",
+                borderTop: "none",
+                borderRadius: "0",
+              }}
+              value={timeSlot}
+              onChange={(e) => setTimeSlot(e.target.value)}
+              type="text"
+              placeholder="Add 1:00 PM"
+            />
+            <SubmitButton
+              style={{ width: "100px" }}
+              variant="primary"
+              onClick={() => handleTimeSlot()}
+            >
+              Add
+            </SubmitButton>
+          </div>
         </Form.Group>
-        <Button variant="primary" onClick={() => handleTimeSlot()}>
-          Add
-        </Button>
-      </Form>
-      <Button onClick={() => navigate("/admin/data")}>Get All Data</Button>
+
+        <EditButton
+          style={{ marginTop: "40px" }}
+          onClick={() => navigate("/admin/data")}
+        >
+          Get All Data
+        </EditButton>
+      </BaseForm>
     </>
   );
 }
